@@ -3,6 +3,7 @@
   "editor.detectIndentation": false,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
   "typescript.preferences.quoteStyle": "single",
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "editor.formatOnSave": true,

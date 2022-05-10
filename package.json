@@ -4,8 +4,17 @@
   "description": "Library for creating self extracting shell scripts",
   "main": "dist/libshelf.js",
   "typings": "dist/libshelf.d.ts",
+  "files": [
+    "dist/**/*",
+    "examples/**/*"
+  ],
+  "engines": {
+    "node": ">= 10.0.0"
+  },
   "scripts": {
-    "lint": "eslint src/**/*.ts --quiet --fix"
+    "lint": "eslint src/**/*.ts --quiet --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "tsc"
   },
   "keywords": [
     "self",
