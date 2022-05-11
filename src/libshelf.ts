@@ -4,20 +4,32 @@ import { Readable } from 'stream';
 
 /** A file to embed specified as a path */
 interface EmbedableFileFromPath {
+  // The filename to create within the archive
   filename: string;
+  // The path to the file to embed
   path: string;
+  // The mode flags to set. If omitted this defaults to 0644
+  mode?: number;
 }
 
 /** A file to embed specified as a buffer */
 interface EmbeddableFileFromBuffer {
+  // The filename to create within the archive
   filename: string;
+  // The content to embed
   content: Buffer;
+  // The mode flags to set. If omitted this defaults to 0644
+  mode?: number;
 }
 
 /** A file to embed specified as a readable stream */
 interface EmbeddableFileFromStream {
+  // The filename to create within the archive
   filename: string;
+  // The stream to embed
   content: Readable;
+  // The mode flags to set. If omitted this defaults to 0644
+  mode?: number;
 }
 
 /** A individual file to place in the archive. The name should include the full path */
@@ -85,8 +97,11 @@ export async function makeSelfExtractingScript(
   scriptSections.push('#!/bin/sh\n');
 
   if (!omitLibraryHeader) {
-    // TODO: Improve self promotion string
-    scriptSections.push("# Self extracting self script created with 'shelf'\n");
+    scriptSections.push(
+      "# Self extracting self script created with 'make-self-extracting'\n" +
+        '# https://www.npmjs.com/package/make-self-extracting\n' +
+        '# https://github.com/danishcake/make-self-extracting\n'
+    );
   }
 
   if (preExtraction != null) {
@@ -96,7 +111,7 @@ export async function makeSelfExtractingScript(
   // Add extraction code. This relies on knowing the line on which the payload starts
   const payloadStartLine =
     1 + // Leading shbang
-    (omitLibraryHeader ? 0 : 1) +
+    (omitLibraryHeader ? 0 : 3) +
     (preExtraction != null ? (preExtraction.match(/\n/g) || []).length + 1 : 0) +
     (postExtraction != null ? (postExtraction.match(/\n/g) || []).length + 1 : 0) +
     3 + // Cleanup trailer
@@ -150,11 +165,11 @@ export async function makeSelfExtractingScript(
 
   for (const file of files) {
     if (isEmbeddableFileFromPath(file)) {
-      archive.append(fs.createReadStream(file.path), { name: file.filename });
+      archive.append(fs.createReadStream(file.path), { name: file.filename, mode: file.mode });
     } else if (isEmbeddableFileFromBuffer(file)) {
-      archive.append(Readable.from(file.content), { name: file.filename });
+      archive.append(Readable.from(file.content), { name: file.filename, mode: file.mode });
     } else {
-      archive.append(file.content, { name: file.filename });
+      archive.append(file.content, { name: file.filename, mode: file.mode });
     }
   }
 

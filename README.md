@@ -27,11 +27,11 @@ await makeSelfExtractingScript(
       content: Buffer.from('This text comes from an embedded file\n', 'utf-8')
     },
     {
-      filename: 'example_zip.sh',
+      filename: 'example_zip.mjs',
       content: fs.createReadStream('examples/zip_format.mjs')
     },
     {
-      filename: 'example_docker.sh',
+      filename: 'example_docker.mjs',
       content: fs.createReadStream('examples/docker.mjs')
     }
   ],
@@ -43,10 +43,12 @@ This generates output that looks like this:
 
 ```Bash
 #!/bin/sh
-# Self extracting self script created with 'shelf'
+# Self extracting self script created with 'make-self-extracting
+# https://www.npmjs.com/package/make-self-extracting
+# https://github.com/danishcake/make-self-extracting
 echo This section runs in `pwd`
 readonly TMPDIR=`mktemp -d`
-readonly PAYLOAD_START=15
+readonly PAYLOAD_START=16
 tail -n+$PAYLOAD_START $0 | tar -xz -C $TMPDIR
 pushd $TMPDIR > /dev/null
 cat header.txt
@@ -81,6 +83,17 @@ type SelfExtractingScriptOptions = {
 ```
 
 Additional examples are in the examples folder. They expect to be run from the project root.
+
+You can add files for `Buffers`, `Readables` and paths to local files. The file mode defaults to 644 but can be set on a per file basis is required.
+
+```Typescript
+// Embedded shell script must be executable
+{
+  filename: 'setup.sh',
+  path: 'setup.sh',
+  mode: 0o755
+}
+```
 
 ## How it works
 
