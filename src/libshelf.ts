@@ -105,21 +105,21 @@ export async function makeSelfExtractingScript(
   if (archiveFormat === 'tar') {
     scriptSections.push(
       'readonly TMPDIR=`mktemp -d`\n' +
-      `readonly PAYLOAD_START=${payloadStartLine + 4}\n` +
-      (compressionLevel === 0
-        ? 'tail -n+$PAYLOAD_START $0 | tar -x -C $TMPDIR\n'
-        : 'tail -n+$PAYLOAD_START $0 | tar -xz -C $TMPDIR\n') +
-      'pushd $TMPDIR > /dev/null\n'
+        `readonly PAYLOAD_START=${payloadStartLine + 4}\n` +
+        (compressionLevel === 0
+          ? 'tail -n+$PAYLOAD_START $0 | tar -x -C $TMPDIR\n'
+          : 'tail -n+$PAYLOAD_START $0 | tar -xz -C $TMPDIR\n') +
+        'pushd $TMPDIR > /dev/null\n'
     );
   } else {
     // archiveFormat === 'zip'
     scriptSections.push(
       'readonly TMPDIR=`mktemp -d`\n' +
-      `readonly PAYLOAD_START=${payloadStartLine + 6}\n` +
-      'tail -n+$PAYLOAD_START $0 > ${TMPDIR}/self_extractor_payload.zip\n' +
-      'unzip -qq ${TMPDIR}/self_extractor_payload.zip -d $TMPDIR\n' +
-      'rm ${TMPDIR}/self_extractor_payload.zip\n' +
-      'pushd $TMPDIR > /dev/null\n'
+        `readonly PAYLOAD_START=${payloadStartLine + 6}\n` +
+        'tail -n+$PAYLOAD_START $0 > ${TMPDIR}/self_extractor_payload.zip\n' +
+        'unzip -qq ${TMPDIR}/self_extractor_payload.zip -d $TMPDIR\n' +
+        'rm ${TMPDIR}/self_extractor_payload.zip\n' +
+        'pushd $TMPDIR > /dev/null\n'
     );
   }
 

@@ -1,5 +1,5 @@
 {
-  "name": "shelf",
+  "name": "make-self-extracting",
   "version": "1.0.0",
   "description": "Library for creating self extracting shell scripts",
   "main": "dist/libshelf.js",
@@ -14,7 +14,8 @@
   "scripts": {
     "lint": "eslint src/**/*.ts --quiet --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "tsc"
   },
   "keywords": [
     "self",

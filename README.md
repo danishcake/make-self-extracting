@@ -19,7 +19,7 @@ The script runs in two stages:
 await makeSelfExtractingScript(
   {
     preExtraction: 'echo This section runs in `pwd`',
-    postExtraction: 'cat header.txt\necho This section runs in `pwd`\nls -l\ncat footer.txt'
+    postExtraction: 'cat header.txt\necho This section runs in `pwd`\nls -l'
   },
   [
     {
@@ -27,8 +27,12 @@ await makeSelfExtractingScript(
       content: Buffer.from('This text comes from an embedded file\n', 'utf-8')
     },
     {
-      filename: 'footer.txt',
-      content: Buffer.from('Thanks for using shelf!\n', 'utf-8')
+      filename: 'example_zip.sh',
+      content: fs.createReadStream('examples/zip_format.mjs')
+    },
+    {
+      filename: 'example_docker.sh',
+      content: fs.createReadStream('examples/docker.mjs')
     }
   ],
   fs.createWriteStream('simple.sh')
@@ -48,7 +52,6 @@ pushd $TMPDIR > /dev/null
 cat header.txt
 echo This section runs in `pwd`
 ls -l
-cat footer.txt
 popd > /dev/null
 rm -rf $TMPDIR
 exit 0
