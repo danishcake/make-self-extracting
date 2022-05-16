@@ -2,6 +2,7 @@
   "name": "make-self-extracting",
   "version": "1.0.0",
   "description": "Library for creating self extracting shell scripts",
+  "homepage": "https://github.com/danishcake/make-self-extracting",
   "main": "dist/libshelf.js",
   "typings": "dist/libshelf.d.ts",
   "files": [
@@ -22,7 +23,9 @@
     "self",
     "extracting",
     "shell",
-    "tar"
+    "tar",
+    "shellscript",
+    "self-extracting"
   ],
   "author": "Edward Woolhouse",
   "license": "MIT",
