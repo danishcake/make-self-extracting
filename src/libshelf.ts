@@ -165,7 +165,11 @@ export async function makeSelfExtractingScript(
 
   for (const file of files) {
     if (isEmbeddableFileFromPath(file)) {
-      archive.append(fs.createReadStream(file.path), { name: file.filename, mode: file.mode });
+      // Generate a nice exception if the file doesn't exist by opening the file
+      // in a slightly weird fashion, as createReadStream is lazy, resulting in a delay
+      // in the generation of the exception to when archiver first attempts to read from the file
+      const readStream = fs.createReadStream('', { fd: await fs.promises.open(file.path, 'r') });
+      archive.append(readStream, { name: file.filename, mode: file.mode });
     } else if (isEmbeddableFileFromBuffer(file)) {
       archive.append(Readable.from(file.content), { name: file.filename, mode: file.mode });
     } else {
