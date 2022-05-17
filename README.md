@@ -100,6 +100,10 @@ You can add files for `Buffers`, `Readables` and paths to local files. The file 
 The embedded files are stored in an archive and appended to the shell script. The script then uses `tail` on itself to extract the
 archive to a temporary directory when run.
 
+## Remarks
+
+The code herein will probably work fine under older versions of Node. The limiting factor is the jest unit test library.
+
 ## Refences
 
 [linuxjournal](https://www.linuxjournal.com/node/1005818)

@@ -168,7 +168,9 @@ export async function makeSelfExtractingScript(
       // Generate a nice exception if the file doesn't exist by opening the file
       // in a slightly weird fashion, as createReadStream is lazy, resulting in a delay
       // in the generation of the exception to when archiver first attempts to read from the file
-      const readStream = fs.createReadStream('', { fd: await fs.promises.open(file.path, 'r') });
+      // Also note that we're using the fs.openSync method to workaround failures on older
+      // node versions with fs.promises.open. Why? It is a mystery!
+      const readStream = fs.createReadStream('', { fd: fs.openSync(file.path, 'r') });
       archive.append(readStream, { name: file.filename, mode: file.mode });
     } else if (isEmbeddableFileFromBuffer(file)) {
       archive.append(Readable.from(file.content), { name: file.filename, mode: file.mode });
