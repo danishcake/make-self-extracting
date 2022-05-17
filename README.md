@@ -1,4 +1,4 @@
-# Shelf
+# make-self-extracting
 
 A library for the creation of self extracting shell scripts.
 
