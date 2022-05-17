@@ -1,10 +1,23 @@
 # make-self-extracting
 
-A library for the creation of self extracting shell scripts.
+A library for the creation of self extracting shell scripts supporting Node 12 and newer.
+
+![Unit tests](https://github.com/danishcake/make-self-extracting/actions/workflows/run-tests.yml/badge.svg)
+
+Github: https://github.com/danishcake/make-self-extracting \
+NPM: https://www.npmjs.com/package/make-self-extracting
 
 ## Why?
 
 It's easier for your users if you distribute a single file, and it's called `install.sh`.
+
+## Installation
+
+Run
+
+```Bash
+npm install make-self-extracting --save
+```
 
 ## Usage
 

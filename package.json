@@ -1,6 +1,6 @@
 {
   "name": "make-self-extracting",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library for creating self extracting shell scripts",
   "homepage": "https://github.com/danishcake/make-self-extracting",
   "main": "dist/libshelf.js",
