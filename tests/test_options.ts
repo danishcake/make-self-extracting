@@ -7,7 +7,7 @@ describe('Archive creation', () => {
     const output = await makeSelfExtractingScriptAsString({}, []);
 
     // Output should start with a shebang
-    expect(output).toStartWith('#!/bin/sh');
+    expect(output).toStartWith('#!/bin/bash');
 
     // Output should have a PAYLOAD_START of 12
     expect(output).toMatch('readonly PAYLOAD_START=12');
@@ -133,7 +133,7 @@ describe('Archive creation', () => {
     );
 
     // Output should start with a shebang
-    expect(output).toStartWith('#!/bin/sh');
+    expect(output).toStartWith('#!/bin/bash');
 
     // Output should have a PAYLOAD_START of 14
     expect(output).toMatch('readonly PAYLOAD_START=14');
