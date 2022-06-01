@@ -94,7 +94,7 @@ export async function makeSelfExtractingScript(
   } = options;
 
   const scriptSections: string[] = [];
-  scriptSections.push('#!/bin/sh\n');
+  scriptSections.push('#!/bin/bash\n');
 
   if (!omitLibraryHeader) {
     scriptSections.push(

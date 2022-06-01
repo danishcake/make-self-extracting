@@ -7,6 +7,8 @@ A library for the creation of self extracting shell scripts supporting Node 12 a
 Github: https://github.com/danishcake/make-self-extracting \
 NPM: https://www.npmjs.com/package/make-self-extracting
 
+The shell scripts are designed to run under bash.
+
 ## Why?
 
 It's easier for your users if you distribute a single file, and it's called `install.sh`.
@@ -55,7 +57,7 @@ await makeSelfExtractingScript(
 This generates output that looks like this:
 
 ```Bash
-#!/bin/sh
+#!/bin/bash
 # Self extracting self script created with 'make-self-extracting
 # https://www.npmjs.com/package/make-self-extracting
 # https://github.com/danishcake/make-self-extracting
